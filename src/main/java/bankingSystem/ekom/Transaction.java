@@ -12,11 +12,12 @@ public class Transaction {
 
 
     public Transaction(String transactionType,
-                       double amount ){
+                       double amount, String description ){
         this.amount = amount;
         this.transactionID = "T" + accountVal++;
         this.dateAndTime = LocalDateTime.now();
         this.transactionType = transactionType;
+        this.description = description;
 
     }
 
@@ -35,5 +36,8 @@ public class Transaction {
         return this.dateAndTime;
     }
 
+    public String getDescription(){
+        return this.description;
+    }
 
 }

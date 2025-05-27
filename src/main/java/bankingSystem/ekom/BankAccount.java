@@ -1,6 +1,9 @@
 package bankingSystem.ekom;
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class BankAccount {
@@ -16,27 +19,48 @@ public class BankAccount {
         this.accountHolderName = accountHolder;
         this.accountBalance = balance;
         transactions = new ArrayList<>();
-        transactions.add(new Transaction("DEPOSIT", accountBalance));
+        transactions.add(new Transaction("DEPOSIT", accountBalance, "Initial Deposit"));
+        try{
+            File allAccounts = new File("AccountsList.txt");
+            FileWriter fileWriter = new FileWriter(allAccounts.getName(),true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(toString());
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+
+        } catch (Exception e) {
+            System.out.println("Error creating file.");
+            throw new RuntimeException(e);
+        }
     }
 
-    public void deposit(double newAmount){
+    public void deposit(double newAmount, String description){
         this.accountBalance += newAmount;
-        transactions.add(new Transaction("DEPOSIT", newAmount));
+        transactions.add(new Transaction("DEPOSIT", newAmount, description));
     }
 
-    public void withDraw(double amountToRemove){
-        this.accountBalance -= amountToRemove;
-        transactions.add(new Transaction("WITHDRAWAL", amountToRemove));
+    public void withDraw(double amountToRemove, String description){
+        try {
+            if(amountToRemove < this.accountBalance) {
+                this.accountBalance -= amountToRemove;
+            }
+        }catch (Exception e) {
+            System.out.println("Insufficient Funds");
+            e.getStackTrace();
+        }
+        transactions.add(new Transaction("WITHDRAWAL", amountToRemove, description));
     }
 
     public double getAccountBalance(){
         return this.accountBalance;
     }
 
-    public void transfer(BankAccount recipient, double amount){
+    public void transfer(BankAccount recipient, double amount, String description){
         this.accountBalance -= amount;
-        recipient.deposit(amount);
-        transactions.add(new Transaction("TRANSFER SENT", amount));
+        recipient.deposit(amount, description);
+        transactions.add(new Transaction("TRANSFER SENT", amount, description));
+
+        recipient.transactions.add(new Transaction("TRANSACTION RECIEVED", amount, description));
     }
 
     @Override
