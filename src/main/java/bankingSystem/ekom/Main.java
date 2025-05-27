@@ -6,15 +6,17 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("********");
-        System.out.println("Banking Program");
+        System.out.println("Edeme Bank");
         System.out.println("********");
         boolean userActive = true;
 
 
         while(userActive){
             boolean userSearching = true;
+            System.out.println("********* Menu ********");
             System.out.println("1. Create An Account.");
             System.out.println("2. View All Accounts.");
+            System.out.println("3. View A single Account.");
 
             System.out.print("Selection: ");
             int userOption = sc.nextInt();
@@ -41,6 +43,8 @@ public class Main {
                      break;
 
                  case 2:
+                     System.out.println("All Accounts: ");
+
 
 
                  default:

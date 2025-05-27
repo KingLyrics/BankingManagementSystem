@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BankAccount {
     static Random random = new Random();
@@ -15,14 +16,14 @@ public class BankAccount {
     private ArrayList<Transaction> transactions;
 
 
-    public BankAccount(String accountHolder, double balance){
+    public BankAccount(String accountHolder, double accountBalance){
         this.accountId = "ACC" + nextId++;
         this.accountHolderName = accountHolder;
-        this.accountBalance = balance;
+        this.accountBalance = accountBalance;
         transactions = new ArrayList<>();
         transactions.add(new Transaction(
                 "DEPOSIT",
-                accountBalance, "Initial Deposit"));
+                this.accountBalance, "Initial Deposit"));
         try{
             File allAccounts = new File("AccountsList.txt");
             FileWriter fileWriter = new FileWriter(allAccounts.getName(),true);
