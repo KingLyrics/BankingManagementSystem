@@ -7,7 +7,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class BankAccount {
-    private static int nextId = 1000;
+    static Random random = new Random();
+    private static int nextId = random.nextInt(900) + 100;
     private final String accountId;
     private final String accountHolderName;
     private double accountBalance;
