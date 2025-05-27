@@ -19,7 +19,9 @@ public class BankAccount {
         this.accountHolderName = accountHolder;
         this.accountBalance = balance;
         transactions = new ArrayList<>();
-        transactions.add(new Transaction("DEPOSIT", accountBalance, "Initial Deposit"));
+        transactions.add(new Transaction(
+                "DEPOSIT",
+                accountBalance, "Initial Deposit"));
         try{
             File allAccounts = new File("AccountsList.txt");
             FileWriter fileWriter = new FileWriter(allAccounts.getName(),true);
@@ -60,7 +62,11 @@ public class BankAccount {
         recipient.deposit(amount, description);
         transactions.add(new Transaction("TRANSFER SENT", amount, description));
 
-        recipient.transactions.add(new Transaction("TRANSACTION RECIEVED", amount, description));
+        recipient.transactions.add(new Transaction("TRANSACTION RECEIVED", amount, description));
+    }
+
+    public ArrayList<Transaction> getTransactions(){
+        return this.transactions;
     }
 
     @Override
