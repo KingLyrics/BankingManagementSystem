@@ -7,7 +7,7 @@ public class BankAccount {
     private final String accountHolderName;
     private double accountBalance;
 
-    BankAccount(String accountHolder, double balance){
+    public BankAccount(String accountHolder, double balance){
         this.accountId = "ACC" + nextId++;
         this.accountHolderName = accountHolder;
         this.accountBalance = balance;
