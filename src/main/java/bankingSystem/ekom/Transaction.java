@@ -11,12 +11,29 @@ public class Transaction {
     private String description;
 
 
-    public Transaction(String transactionType,double amount, String description ){
+    public Transaction(String transactionType,
+                       double amount ){
         this.amount = amount;
         this.transactionID = "T" + accountVal++;
         this.dateAndTime = LocalDateTime.now();
-        this.description = description;
         this.transactionType = transactionType;
 
     }
+
+    public String getTransactionID(){
+        return this.transactionID;
+    }
+    public  String getTransactionType(){
+        return this.transactionType;
+    }
+
+    public  double getAmount(){
+        return this.amount;
+    }
+
+    public LocalDateTime getDateAndTime(){
+        return this.dateAndTime;
+    }
+
+
 }
